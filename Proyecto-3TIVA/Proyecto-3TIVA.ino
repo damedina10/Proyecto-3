@@ -46,7 +46,7 @@ File archivo;
 #define boton2 PF_0
 
 //Color del texto en la pantalla TFT
-#define celeste 0x1C7F
+#define rojo 0xB000
 
 //Buzzer
 #define sound PB_0
@@ -122,18 +122,14 @@ void setup() {
   SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
   LCD_Init();
   LCD_Clear(0x00);
-  //Marco Negro
-  FillRect(0, 0, 319, 239, 0x0000);
-  //Marco celeste
-  FillRect(10, 10, 299, 219, celeste);
-  //Marco negro 2
+  //Marco rojo
+  FillRect(10, 10, 299, 219, rojo);
+  //Fondo de pantalla
   FillRect(20, 20, 279, 199, 0x0000);
-  //Fondo Blanco
-  FillRect(30, 30, 259, 179, 0xffff);
   //Se muesta al encender el dispositivo
-  String portada = "HumE";
-  LCD_Print(portada, 120, 110, 2, celeste, 0xffff);
-  LCD_Bitmap(200, 100, 32, 32, gota);
+  String portada = "HeartBip";
+  LCD_Print(portada, 80, 110, 2, 0xffff, 0x0000);
+  LCD_Bitmap(210, 100, 32, 32, corazon);
   delay(3000);
 }
 
@@ -144,34 +140,34 @@ void loop() {
   //Menú principal 
   if (estado == 0){
     //Cambia el estado a 1
-    //Fondo Blanco
-    FillRect(30, 30, 259, 179, 0xffff);
+    //Fondo de pantalla
+    FillRect(20, 20, 279, 199, 0x0000);
     //Pantalla de carga
-    LCD_Bitmap(40, 40, 32, 32, gota);
-    LCD_Bitmap(144, 40, 32, 32, gota);
-    LCD_Bitmap(249, 40, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 80, 32, 32, gota);
-    LCD_Bitmap(144, 80, 32, 32, gota);
-    LCD_Bitmap(249, 80, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 120, 32, 32, gota);
-    LCD_Bitmap(144, 120, 32, 32, gota);
-    LCD_Bitmap(249, 120, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 160, 32, 32, gota);
-    LCD_Bitmap(144, 160, 32, 32, gota);
-    LCD_Bitmap(249, 160, 32, 32, gota);
-    delay(100);
-    //Fondo Blanco
-    FillRect(30, 30, 259, 179, 0xffff);
+    LCD_Bitmap(50, 50, 32, 23, ritmo);
+    LCD_Bitmap(50, 110, 32, 23, ritmo);
+    LCD_Bitmap(50, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(110, 50, 32, 23, ritmo);
+    LCD_Bitmap(110, 110, 32, 23, ritmo);
+    LCD_Bitmap(110, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(170, 50, 32, 23, ritmo);
+    LCD_Bitmap(170, 110, 32, 23, ritmo);
+    LCD_Bitmap(170, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(230, 50, 32, 23, ritmo);
+    LCD_Bitmap(230, 110, 32, 23, ritmo);
+    LCD_Bitmap(230, 170, 32, 23, ritmo);
+    delay(200);
+    //Fondo de pantalla
+    FillRect(20, 20, 279, 199, 0x0000);
     String opciones = "Escoga una opcion:";
-    LCD_Print("Escoga una", 70, 60, 2, celeste, 0xffff);
-    LCD_Print("opcion:", 100, 80, 2, celeste, 0xffff);
+    LCD_Print("Escoga una", 70, 60, 2, 0xffff, 0x0000);
+    LCD_Print("opcion:", 100, 80, 2, 0xffff, 0x0000);
     String opcion1 = "1.Medicion";
-    LCD_Print(opcion1, 40, 110, 2, celeste, 0xffff);
+    LCD_Print(opcion1, 40, 110, 2, 0xffff, 0x0000);
     String opcion2 = "2.Guardar dato";
-    LCD_Print(opcion2, 40, 150, 2, celeste, 0xffff);
+    LCD_Print(opcion2, 40, 150, 2, 0xffff, 0x0000);
     estado = 1;
   }
   
@@ -179,50 +175,53 @@ void loop() {
   if(digitalRead(boton1)==0){
     delay(150);
     Serial3.println("1");
-    //Fondo Blanco
-    FillRect(30, 30, 259, 179, 0xffff);
+    //Fondo de pantalla
+    FillRect(20, 20, 279, 199, 0x0000);
     //Pantalla de carga
-    LCD_Bitmap(40, 40, 32, 32, gota);
-    LCD_Bitmap(144, 40, 32, 32, gota);
-    LCD_Bitmap(249, 40, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 80, 32, 32, gota);
-    LCD_Bitmap(144, 80, 32, 32, gota);
-    LCD_Bitmap(249, 80, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 120, 32, 32, gota);
-    LCD_Bitmap(144, 120, 32, 32, gota);
-    LCD_Bitmap(249, 120, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 160, 32, 32, gota);
-    LCD_Bitmap(144, 160, 32, 32, gota);
-    LCD_Bitmap(249, 160, 32, 32, gota);
-    delay(500);
+    LCD_Bitmap(50, 50, 32, 23, ritmo);
+    LCD_Bitmap(50, 110, 32, 23, ritmo);
+    LCD_Bitmap(50, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(110, 50, 32, 23, ritmo);
+    LCD_Bitmap(110, 110, 32, 23, ritmo);
+    LCD_Bitmap(110, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(170, 50, 32, 23, ritmo);
+    LCD_Bitmap(170, 110, 32, 23, ritmo);
+    LCD_Bitmap(170, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(230, 50, 32, 23, ritmo);
+    LCD_Bitmap(230, 110, 32, 23, ritmo);
+    LCD_Bitmap(230, 170, 32, 23, ritmo);
+    delay(200);
     //Datos del sensor recibidos del ESP32
     if(Serial3.available()>0){
     //Se lee el dato y se guarda en una variable
     humedad = Serial3.readStringUntil('\n');
     }
-    //Fondo Blanco
-    FillRect(30, 30, 259, 179, 0xffff);
+    //Fondo de pantalla
+    FillRect(20, 20, 279, 199, 0x0000);
     //Si se escoge realizar una medición
-    LCD_Print("Humedad:", 100, 80, 2, celeste, 0xffff);
-    LCD_Print(humedad, 110, 120, 2, celeste, 0xffff);
-    LCD_Print("%", 190, 120, 2, celeste, 0xffff);
+    LCD_Print("Ritmo cardiaco:", 90, 80, 2, 0xffff, 0x0000);
+    LCD_Print(humedad, 110, 120, 2, 0xffff, 0x0000);
+    LCD_Print("bpm", 190, 120, 2, 0xffff, 0x0000);
     //Si no hay tanta humedad solo aparece una gota
     if(humedad.toInt() < 34){
-      LCD_Bitmap(144, 160, 32, 32, gota);
+      LCD_Bitmap(107, 160, 32, 32, corazonEnfermo);
+      LCD_Bitmap(144, 160, 32, 32, corazonEnfermo);
+      LCD_Bitmap(180, 160, 32, 32, corazonEnfermo);
     }
     //Si hay una humedad moderada aparecen dos gotas
     if(34 < humedad.toInt() && humedad.toInt() < 68){
-      LCD_Bitmap(123, 160, 32, 32, gota);
-      LCD_Bitmap(170, 160, 32, 32, gota);
+      LCD_Bitmap(107, 160, 32, 32, corazonOpaco);
+      LCD_Bitmap(144, 160, 32, 32, corazonOpaco);
+      LCD_Bitmap(180, 160, 32, 32, corazonOpaco);
     }
     //Si hay una humedad moderada aparecen dos gotas
     if(humedad.toInt() > 68){
-      LCD_Bitmap(107, 160, 32, 32, gota);
-      LCD_Bitmap(144, 160, 32, 32, gota);
-      LCD_Bitmap(180, 160, 32, 32, gota);
+      LCD_Bitmap(107, 160, 32, 32, corazon);
+      LCD_Bitmap(144, 160, 32, 32, corazon);
+      LCD_Bitmap(180, 160, 32, 32, corazon);
     }
     //Sonido de medición 
     tone(sound,440,100);
@@ -267,31 +266,29 @@ void loop() {
     delay(150);
     memoriaSD();
     Serial3.println("2");
-    //Fondo Blanco
-    FillRect(30, 30, 259, 179, 0xffff);
-    //Pantalla de carga
-    LCD_Bitmap(40, 40, 32, 32, gota);
-    LCD_Bitmap(144, 40, 32, 32, gota);
-    LCD_Bitmap(249, 40, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 80, 32, 32, gota);
-    LCD_Bitmap(144, 80, 32, 32, gota);
-    LCD_Bitmap(249, 80, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 120, 32, 32, gota);
-    LCD_Bitmap(144, 120, 32, 32, gota);
-    LCD_Bitmap(249, 120, 32, 32, gota);
-    delay(100);
-    LCD_Bitmap(40, 160, 32, 32, gota);
-    LCD_Bitmap(144, 160, 32, 32, gota);
-    LCD_Bitmap(249, 160, 32, 32, gota);
-    delay(100);
-    //Fondo Blanco
-    FillRect(30, 30, 259, 179, 0xffff);
+    //Fondo de pantalla
+    LCD_Bitmap(50, 50, 32, 23, ritmo);
+    LCD_Bitmap(50, 110, 32, 23, ritmo);
+    LCD_Bitmap(50, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(110, 50, 32, 23, ritmo);
+    LCD_Bitmap(110, 110, 32, 23, ritmo);
+    LCD_Bitmap(110, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(170, 50, 32, 23, ritmo);
+    LCD_Bitmap(170, 110, 32, 23, ritmo);
+    LCD_Bitmap(170, 170, 32, 23, ritmo);
+    delay(200);
+    LCD_Bitmap(230, 50, 32, 23, ritmo);
+    LCD_Bitmap(230, 110, 32, 23, ritmo);
+    LCD_Bitmap(230, 170, 32, 23, ritmo);
+    delay(200);
+    //Fondo de pantalla
+    FillRect(20, 20, 279, 199, 0x0000);
     //Si se escoge guardar un dato
-    LCD_Print("El dato se", 75, 80, 2, celeste, 0xffff);
-    LCD_Print("ha guardado", 70, 120, 2, celeste, 0xffff);
-    LCD_Print("exitosamente!", 60, 160, 2, celeste, 0xffff);
+    LCD_Print("El dato se", 75, 80, 2, 0xffff, 0x0000);
+    LCD_Print("ha guardado", 70, 120, 2, 0xffff, 0x0000);
+    LCD_Print("exitosamente!", 60, 160, 2, 0xffff, 0x0000);
     //Sonido de guardado
     tone(sound,440,100);
     delay(100);

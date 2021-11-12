@@ -67,7 +67,7 @@ File archivo;
 //-------------------------------------------------------------------------------------------------
 
 //Variable para el dato del sensor proveniente del ESP32
-String humedad = "";
+String humedad = "80";
 
 //Estado para que se muestre solo una vez el menú principal
 int estado = 0;
@@ -195,30 +195,30 @@ void loop() {
     LCD_Bitmap(230, 170, 32, 23, ritmo);
     delay(200);
     //Datos del sensor recibidos del ESP32
-    if(Serial3.available()>0){
+   /* if(Serial3.available()>0){
     //Se lee el dato y se guarda en una variable
     humedad = Serial3.readStringUntil('\n');
-    }
+    }*/
     //Fondo de pantalla
     FillRect(20, 20, 279, 199, 0x0000);
     //Si se escoge realizar una medición
-    LCD_Print("Ritmo cardiaco:", 90, 80, 2, 0xffff, 0x0000);
-    LCD_Print(humedad, 110, 120, 2, 0xffff, 0x0000);
-    LCD_Print("bpm", 190, 120, 2, 0xffff, 0x0000);
+    LCD_Print("SpO2:", 120, 80, 2, 0xffff, 0x0000);
+    LCD_Print(humedad, 130, 120, 2, 0xffff, 0x0000);
+    LCD_Print("%", 170, 120, 2, 0xffff, 0x0000);
     //Si no hay tanta humedad solo aparece una gota
-    if(humedad.toInt() < 34){
+    if(humedad.toInt() < 90){
       LCD_Bitmap(107, 160, 32, 32, corazonEnfermo);
       LCD_Bitmap(144, 160, 32, 32, corazonEnfermo);
       LCD_Bitmap(180, 160, 32, 32, corazonEnfermo);
     }
     //Si hay una humedad moderada aparecen dos gotas
-    if(34 < humedad.toInt() && humedad.toInt() < 68){
+    if(89 < humedad.toInt() && humedad.toInt() < 95){
       LCD_Bitmap(107, 160, 32, 32, corazonOpaco);
       LCD_Bitmap(144, 160, 32, 32, corazonOpaco);
       LCD_Bitmap(180, 160, 32, 32, corazonOpaco);
     }
     //Si hay una humedad moderada aparecen dos gotas
-    if(humedad.toInt() > 68){
+    if(humedad.toInt() > 94){
       LCD_Bitmap(107, 160, 32, 32, corazon);
       LCD_Bitmap(144, 160, 32, 32, corazon);
       LCD_Bitmap(180, 160, 32, 32, corazon);

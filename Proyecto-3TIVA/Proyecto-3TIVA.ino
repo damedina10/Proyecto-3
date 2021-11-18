@@ -67,7 +67,8 @@ File archivo;
 //-------------------------------------------------------------------------------------------------
 
 //Variable para el dato del sensor proveniente del ESP32
-String humedad = "80";
+String heartRate = "";
+String spo2 = "";
 
 //Estado para que se muestre solo una vez el menú principal
 int estado = 0;

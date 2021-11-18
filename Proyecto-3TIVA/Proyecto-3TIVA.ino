@@ -198,14 +198,18 @@ void loop() {
     //Datos del sensor recibidos del ESP32
    /* if(Serial3.available()>0){
     //Se lee el dato y se guarda en una variable
-    humedad = Serial3.readStringUntil('\n');
+    heartRate = Serial3.readStringUntil('\n');
+    spo2 = Serial3.readStringUntil('\n');
     }*/
     //Fondo de pantalla
     FillRect(20, 20, 279, 199, 0x0000);
     //Si se escoge realizar una medición
-    LCD_Print("SpO2:", 120, 80, 2, 0xffff, 0x0000);
-    LCD_Print(humedad, 130, 120, 2, 0xffff, 0x0000);
-    LCD_Print("%", 170, 120, 2, 0xffff, 0x0000);
+    LCD_Print("Ritmo Cardiaco:", 40, 40, 2, 0xffff, 0x0000);
+    LCD_Print(heartRate, 120, 70, 2, 0xffff, 0x0000);
+    LCD_Print("bpm", 170, 70, 2, 0xffff, 0x0000);
+    LCD_Print("SpO2:", 120, 100, 2, 0xffff, 0x0000);
+    LCD_Print(spo2, 130, 130, 2, 0xffff, 0x0000);
+    LCD_Print("%", 170, 130, 2, 0xffff, 0x0000);
     //Si no hay tanta humedad solo aparece una gota
     if(humedad.toInt() < 90){
       LCD_Bitmap(107, 160, 32, 32, corazonEnfermo);

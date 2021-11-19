@@ -178,23 +178,24 @@ void loop() {
     Serial3.println("1");
     //Fondo de pantalla
     FillRect(20, 20, 279, 199, 0x0000);
+    delay(3200);
     //Pantalla de carga
     LCD_Bitmap(50, 50, 32, 23, ritmo);
     LCD_Bitmap(50, 110, 32, 23, ritmo);
     LCD_Bitmap(50, 170, 32, 23, ritmo);
-    delay(200);
+    delay(3200);
     LCD_Bitmap(110, 50, 32, 23, ritmo);
     LCD_Bitmap(110, 110, 32, 23, ritmo);
     LCD_Bitmap(110, 170, 32, 23, ritmo);
-    delay(200);
+    delay(3200);
     LCD_Bitmap(170, 50, 32, 23, ritmo);
     LCD_Bitmap(170, 110, 32, 23, ritmo);
     LCD_Bitmap(170, 170, 32, 23, ritmo);
-    delay(200);
+    delay(3200);
     LCD_Bitmap(230, 50, 32, 23, ritmo);
     LCD_Bitmap(230, 110, 32, 23, ritmo);
     LCD_Bitmap(230, 170, 32, 23, ritmo);
-    delay(200);
+    delay(3200);
     //Datos del sensor recibidos del ESP32
     if(Serial3.available()>0){
     //Se lee el dato y se guarda en una variable
@@ -205,28 +206,30 @@ void loop() {
     FillRect(20, 20, 279, 199, 0x0000);
     //Si se escoge realizar una medición
     LCD_Print("Ritmo Cardiaco:", 40, 40, 2, 0xffff, 0x0000);
-    LCD_Print(heartRate, 120, 70, 2, 0xffff, 0x0000);
+    LCD_Print(heartRate, 100, 70, 2, 0xffff, 0x0000);
     LCD_Print("bpm", 170, 70, 2, 0xffff, 0x0000);
     LCD_Print("SpO2:", 120, 100, 2, 0xffff, 0x0000);
-    LCD_Print(spo2, 130, 130, 2, 0xffff, 0x0000);
+    LCD_Print(spo2, 100, 130, 2, 0xffff, 0x0000);
     LCD_Print("%", 170, 130, 2, 0xffff, 0x0000);
+    Serial.println(heartRate);
+    Serial.println(spo2);
     //Si no hay tanta humedad solo aparece una gota
-    if(humedad.toInt() < 90){
+    if(heartRate.toInt() < 61){
       LCD_Bitmap(107, 160, 32, 32, corazonEnfermo);
       LCD_Bitmap(144, 160, 32, 32, corazonEnfermo);
       LCD_Bitmap(180, 160, 32, 32, corazonEnfermo);
     }
     //Si hay una humedad moderada aparecen dos gotas
-    if(89 < humedad.toInt() && humedad.toInt() < 95){
-      LCD_Bitmap(107, 160, 32, 32, corazonOpaco);
-      LCD_Bitmap(144, 160, 32, 32, corazonOpaco);
-      LCD_Bitmap(180, 160, 32, 32, corazonOpaco);
-    }
-    //Si hay una humedad moderada aparecen dos gotas
-    if(humedad.toInt() > 94){
+    if(89 < heartRate.toInt() && heartRate.toInt() < 101){
       LCD_Bitmap(107, 160, 32, 32, corazon);
       LCD_Bitmap(144, 160, 32, 32, corazon);
       LCD_Bitmap(180, 160, 32, 32, corazon);
+    }
+    //Si hay una humedad moderada aparecen dos gotas
+    if(heartRate.toInt() > 100){
+      LCD_Bitmap(107, 160, 32, 32, corazonOpaco);
+      LCD_Bitmap(144, 160, 32, 32, corazonOpaco);
+      LCD_Bitmap(180, 160, 32, 32, corazonOpaco);
     }
     //Sonido de medición 
     tone(sound,440,100);
@@ -275,19 +278,19 @@ void loop() {
     LCD_Bitmap(50, 50, 32, 23, ritmo);
     LCD_Bitmap(50, 110, 32, 23, ritmo);
     LCD_Bitmap(50, 170, 32, 23, ritmo);
-    delay(200);
+    delay(500);
     LCD_Bitmap(110, 50, 32, 23, ritmo);
     LCD_Bitmap(110, 110, 32, 23, ritmo);
     LCD_Bitmap(110, 170, 32, 23, ritmo);
-    delay(200);
+    delay(500);
     LCD_Bitmap(170, 50, 32, 23, ritmo);
     LCD_Bitmap(170, 110, 32, 23, ritmo);
     LCD_Bitmap(170, 170, 32, 23, ritmo);
-    delay(200);
+    delay(500);
     LCD_Bitmap(230, 50, 32, 23, ritmo);
     LCD_Bitmap(230, 110, 32, 23, ritmo);
     LCD_Bitmap(230, 170, 32, 23, ritmo);
-    delay(200);
+    delay(500);
     //Fondo de pantalla
     FillRect(20, 20, 279, 199, 0x0000);
     //Si se escoge guardar un dato
@@ -338,19 +341,21 @@ void loop() {
 //-------------------------------------------------------------------------------------------------
 void memoriaSD(void){
     //Se abre el documento para escribir
-    archivo = SD.open("Humedad.csv", FILE_WRITE);
+    archivo = SD.open("HeartBip.csv", FILE_WRITE);
   
   // Si se abrió el documento, entonces se escriben los datos
   if (archivo) {
     //Se muestra en el monitor que se están guardando los datos
-    Serial.println("Se guardó el siguiente dato: ");
-    Serial.print("Humedad: ");
-    Serial.println(humedad);
+    //Serial.println("Se guardó el siguiente dato: ");
+    //Serial.print("Humedad: ");
+    //Serial.println(humedad);
 
     //Se imprimen los datos en la memoria SD
     archivo.print("10/11/21");
     archivo.print(",");
-    archivo.println(humedad);
+    archivo.println(heartRate);
+    archivo.print(",");
+    archivo.println(spo2);
    
     //Cerramos el documento
     archivo.close();

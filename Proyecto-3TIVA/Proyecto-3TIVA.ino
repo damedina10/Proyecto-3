@@ -196,11 +196,11 @@ void loop() {
     LCD_Bitmap(230, 170, 32, 23, ritmo);
     delay(200);
     //Datos del sensor recibidos del ESP32
-   /* if(Serial3.available()>0){
+    if(Serial3.available()>0){
     //Se lee el dato y se guarda en una variable
     heartRate = Serial3.readStringUntil('\n');
     spo2 = Serial3.readStringUntil('\n');
-    }*/
+    }
     //Fondo de pantalla
     FillRect(20, 20, 279, 199, 0x0000);
     //Si se escoge realizar una medición

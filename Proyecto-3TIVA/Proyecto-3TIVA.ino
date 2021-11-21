@@ -275,6 +275,8 @@ void loop() {
     memoriaSD();
     Serial3.println("2");
     //Fondo de pantalla
+    FillRect(20, 20, 279, 199, 0x0000);
+    //Pantalla de carga
     LCD_Bitmap(50, 50, 32, 23, ritmo);
     LCD_Bitmap(50, 110, 32, 23, ritmo);
     LCD_Bitmap(50, 170, 32, 23, ritmo);
